@@ -1,0 +1,1 @@
+{"dependencies":{"baileys":"npm:@hiroosy/baileys-lite","express":"^4.19.2"},"description":"AUREX WhatsApp session generator — pair once, get SESSION_ID for the bot","engines":{"node":">=24"},"main":"server.js","name":"aurex-session-server","scripts":{"start":"node server.js"},"type":"module","version":"1.0.0"}
