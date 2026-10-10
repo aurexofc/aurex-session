@@ -1,42 +1,29 @@
 # 👑 AUREX Session Server
 
-Alag website — WhatsApp number link karo, **SESSION_ID** nikalo, bot ke `.env` mein paste karo. Dobara pairing ki zaroorat nahi.
+Pair a WhatsApp number via pairing code, get a `SESSION_ID` for the AUREX bot.
 
-## Flow
+## Deploy on Vercel
 
-1. Website kholo → number likho (country code ke saath, masalan `923001234567`)
-2. Pairing code milega → WhatsApp → **Linked devices → Link with phone number** → code dalo
-3. Connect hote hi **SESSION_ID** screen pe aa jayegi → Copy
-4. Bot ke `.env` mein add karo:
-   ```
-   SESSION_ID=<paste>
-   ```
-5. Bot restart — pairing code **dobara nahi aayega** ✅
+1. Import this repo in [Vercel](https://vercel.com)
+2. Deploy (no build settings needed)
+3. Open the site → enter number → get pairing code → link in WhatsApp → copy SESSION_ID
 
-## VPS Deploy (ek command)
+> ⚠️ **Note:** Vercel serverless functions are short-lived. The pairing socket
+> must stay alive while you enter the code in WhatsApp — keep the page open
+> and complete pairing quickly. For 24/7 reliability, run `node server.js`
+> on a VPS instead (`npm install && node server.js`).
+
+## Local / VPS
 
 ```bash
-cd ~ && rm -rf aurex-session-server && unzip -o aurex-session-server.zip -d aurex-session-server \
-&& cd aurex-session-server && npm install --omit=dev \
-&& (pm2 delete aurex-session 2>/dev/null; pm2 start server.js --name aurex-session) \
-&& pm2 save && echo "✅ Chal raha hai — port 3001"
+npm install
+node server.js
+# → http://localhost:3001
 ```
 
-Phir kholo: `http://VPS-IP:3001`
+## Env
 
-> **Node 24+ zaroori hai** (built-in SQLite ke liye). Agar pm2 nahi hai: `npm i -g pm2`
-
-## Optional: password lagao
-
-`.env` banao:
-```
-PORT=3001
-ACCESS_KEY=koi-mushkil-password
-```
-Phir restart: `pm2 restart aurex-session`
-
-## Safety
-
-- Session 10 minute mein auto-delete (use ho ya na ho)
-- SESSION_ID milte hi server se delete
-- Ye tumhare WhatsApp login ki chaabi hai — **kisi ko mat dena**, website pe ACCESS_KEY lagao
+| Var | Required | Purpose |
+|-----|----------|---------|
+| `PORT` | no | default 3001 |
+| `ACCESS_KEY` | no | password-gate the site |
