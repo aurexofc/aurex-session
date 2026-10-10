@@ -1,19 +1,19 @@
 # 👑 AUREX Session Server
 
 Pair a WhatsApp number via pairing code, get a `SESSION_ID` for the AUREX bot.
+**One-shot:** pairing code → pair in WhatsApp → SESSION_ID → done. No 24/7 server needed.
 
 ## Deploy on Vercel
 
 1. Import this repo in [Vercel](https://vercel.com)
-2. Deploy (no build settings needed)
-3. Open the site → enter number → get pairing code → link in WhatsApp → copy SESSION_ID
+2. Deploy — no build settings needed
+3. Open the site → enter number → **quickly** enter the pairing code in
+   WhatsApp (Linked Devices → Link with phone number) → copy SESSION_ID
 
-> ⚠️ **Note:** Vercel serverless functions are short-lived. The pairing socket
-> must stay alive while you enter the code in WhatsApp — keep the page open
-> and complete pairing quickly. For 24/7 reliability, run `node server.js`
-> on a VPS instead (`npm install && node server.js`).
+> ⚠️ Vercel caps a request at ~60 seconds — enter the pairing code
+> **within a minute**. If it times out, just try again.
 
-## Local / VPS
+## Local / VPS (no time limit)
 
 ```bash
 npm install
